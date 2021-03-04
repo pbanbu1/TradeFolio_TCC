@@ -17,16 +17,20 @@
 				}
 			});
 
-			request.open("GET", "https://yahoo-finance15.p.rapidapi.com/api/yahoo/ne/news");
-			// "https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete?q=tesla&region=US"
-			// "GET", "https://yahoo-finance15.p.rapidapi.com/api/yahoo/ne/news"
+			//a version of Yahoo API that is reporting less important information
+			// request.open("GET", "https://yahoo-finance15.p.rapidapi.com/api/yahoo/mo/module/AAPL?module=asset-profile%2Cfinancial-data%2Cearnings");
+			// request.setRequestHeader("x-rapidapi-key", "031a4e25ebmsh90cbbcdedd6d636p12216ejsn6fbb9d947cf0");
+			// request.setRequestHeader("x-rapidapi-host", "yahoo-finance15.p.rapidapi.com");
+
+			//a better version of API that is not working
+			// request.open("GET", "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=AMRN&region=US");
 			// request.setRequestHeader("x-rapidapi-key", "031a4e25ebmsh90cbbcdedd6d636p12216ejsn6fbb9d947cf0");
 			// request.setRequestHeader("x-rapidapi-host", "apidojo-yahoo-finance-v1.p.rapidapi.com");
 
-
-			request.open("GET", "https://yahoo-finance15.p.rapidapi.com/api/yahoo/ne/news/AAPL");
+			//some other stock API that is working
+			request.open("GET", "https://alpha-vantage.p.rapidapi.com/query?function=GLOBAL_QUOTE&symbol=TSLA");
 			request.setRequestHeader("x-rapidapi-key", "031a4e25ebmsh90cbbcdedd6d636p12216ejsn6fbb9d947cf0");
-			request.setRequestHeader("x-rapidapi-host", "yahoo-finance15.p.rapidapi.com");
+			request.setRequestHeader("x-rapidapi-host", "alpha-vantage.p.rapidapi.com");
 
 			console.log("1 - request object created");
 
