@@ -7,30 +7,53 @@
 		function getWeather() {
 			/* Step 1: Make instance of request object...
 			...to make HTTP request after page is loaded*/
-			request = new XMLHttpRequest();
 			console.log("1 - request object created");
- 
+
+
+			const data = null;
+
+			const xhr = new XMLHttpRequest();
+			xhr.withCredentials = true;
+
+			xhr.addEventListener("readystatechange", function () {
+				if (this.readyState === this.DONE) {
+					console.log(this.responseText);
+				}
+			});
+
+			xhr.open("GET", "https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete?q=tesla&region=US");
+			xhr.setRequestHeader("x-rapidapi-key", "031a4e25ebmsh90cbbcdedd6d636p12216ejsn6fbb9d947cf0");
+			xhr.setRequestHeader("x-rapidapi-host", "apidojo-yahoo-finance-v1.p.rapidapi.com");
+
+			xhr.send(data);
+
+			// request = new XMLHttpRequest();
+			console.log("1 - request object created");
+
 			// Step 2: Set the URL for the AJAX request to be the JSON file
- 
-		request.open("GET", "https://api.openweathermap.org/data/2.5/weather?lat=71.0589&lon=42.3601&exclude=hourly,daily&units=imperial&appid=209b746a345c5c16f61cecec2ab8d910", true)
+
+			// request.open("GET", "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=tesla&region=US", true)
+
 		// "https://api.openweathermap.org/data/2.5/onecall?lat=71.0589&lon=42.3601&exclude=hourly,daily&units=imperial&appid=6e477249e2b1e0f4d6461a66a1947eaa"209b746a345c5c16f61cecec2ab8d910
 			console.log("2 - opened request file");
- 
+
 			// Step 3: set up event handler/callback
 
 			request.onreadystatechange = function() {
 				console.log("3 - readystatechange event fired.");
- 
+
 				if (request.readyState == 4 && request.status == 200) {
 
 					// Step 5: wait for done + success
 					console.log("5 - response received");
 					result = request.responseText;
+
 					alert(result);
-					weather = JSON.parse(result);
-					
-					document.getElementById("data").innerHTML ="current temp in boston: " + weather["main"]["temp"]; 
-					
+
+					summary = JSON.parse(result);
+
+					document.getElementById("data").innerHTML = summary;
+
 				}
 				else if (request.readyState == 4 && request.status != 200) {
 
@@ -46,7 +69,11 @@
 
 			}
 		// Step 4: fire off the HTTP request
-			request.send();
+
+			xhr.send(data);
+
+			// request.send();
+
 			console.log("4 - Request sent");
 		}
 	</script>
@@ -54,8 +81,6 @@
 
 
 <body onload="getWeather()">
-
-	<h1>Weather</h1>
 	<div id="data">Loading...</div>
 </body>
 </html>
