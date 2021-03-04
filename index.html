@@ -1,40 +1,39 @@
 <!doctype html>
 <html>
 <head>
-	<title>Weather API</title>
+	<title>TradeFolio Data Page</title>
 	<meta charset="utf-8"/>
 	<script>
-		function getWeather() {
+		function getyahoo_data() {
 			/* Step 1: Make instance of request object...
 			...to make HTTP request after page is loaded*/
-			console.log("1 - request object created");
-
-
 			const data = null;
+			const request = new XMLHttpRequest();
+			request.withCredentials = true;
 
-			const xhr = new XMLHttpRequest();
-			xhr.withCredentials = true;
-
-			xhr.addEventListener("readystatechange", function () {
+			request.addEventListener("readystatechange", function () {
 				if (this.readyState === this.DONE) {
 					console.log(this.responseText);
 				}
 			});
 
-			xhr.open("GET", "https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete?q=tesla&region=US");
-			xhr.setRequestHeader("x-rapidapi-key", "031a4e25ebmsh90cbbcdedd6d636p12216ejsn6fbb9d947cf0");
-			xhr.setRequestHeader("x-rapidapi-host", "apidojo-yahoo-finance-v1.p.rapidapi.com");
+			request.open("GET", "https://yahoo-finance15.p.rapidapi.com/api/yahoo/ne/news");
+			// "https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete?q=tesla&region=US"
+			// "GET", "https://yahoo-finance15.p.rapidapi.com/api/yahoo/ne/news"
+			// request.setRequestHeader("x-rapidapi-key", "031a4e25ebmsh90cbbcdedd6d636p12216ejsn6fbb9d947cf0");
+			// request.setRequestHeader("x-rapidapi-host", "apidojo-yahoo-finance-v1.p.rapidapi.com");
 
-			xhr.send(data);
 
-			// request = new XMLHttpRequest();
+			request.open("GET", "https://yahoo-finance15.p.rapidapi.com/api/yahoo/ne/news/AAPL");
+			request.setRequestHeader("x-rapidapi-key", "031a4e25ebmsh90cbbcdedd6d636p12216ejsn6fbb9d947cf0");
+			request.setRequestHeader("x-rapidapi-host", "yahoo-finance15.p.rapidapi.com");
+
 			console.log("1 - request object created");
 
 			// Step 2: Set the URL for the AJAX request to be the JSON file
 
-			// request.open("GET", "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=tesla&region=US", true)
+			// request.open("GET", "https://api.openyahoo_datamap.org/data/2.5/yahoo_data?lat=71.0589&lon=42.3601&exclude=hourly,daily&units=imperial&appid=209b746a345c5c16f61cecec2ab8d910", true)
 
-		// "https://api.openweathermap.org/data/2.5/onecall?lat=71.0589&lon=42.3601&exclude=hourly,daily&units=imperial&appid=6e477249e2b1e0f4d6461a66a1947eaa"209b746a345c5c16f61cecec2ab8d910
 			console.log("2 - opened request file");
 
 			// Step 3: set up event handler/callback
@@ -47,12 +46,10 @@
 					// Step 5: wait for done + success
 					console.log("5 - response received");
 					result = request.responseText;
-
 					alert(result);
+					yahoo_data = JSON.parse(result);
 
-					summary = JSON.parse(result);
-
-					document.getElementById("data").innerHTML = summary;
+					document.getElementById("data").innerHTML ="yahoo_data: " + yahoo_data;
 
 				}
 				else if (request.readyState == 4 && request.status != 200) {
@@ -69,18 +66,16 @@
 
 			}
 		// Step 4: fire off the HTTP request
-
-			xhr.send(data);
-
-			// request.send();
-
+			request.send(null);
 			console.log("4 - Request sent");
 		}
 	</script>
 </head>
 
 
-<body onload="getWeather()">
+<body onload="getyahoo_data()">
+
+	<h1>TradeFolio Data Page</h1>
 	<div id="data">Loading...</div>
 </body>
 </html>
