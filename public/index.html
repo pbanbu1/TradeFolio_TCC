@@ -1,35 +1,146 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <title>Stock Input Page</title>
-    <script src="purchase.js"></script>
-    <link rel="stylesheet" href="main.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TradeFolio - Home</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
 </head>
-<body style="margin: 0.5in;">
-<div>
-    <form name="stock" onsubmit="validateStock(); return false">
-        <h1>Input Stock</h1>
-        <table style="border: 0;">
-            <tr>
-                <td style="border: 0;  text-transform: capitalize;">ticker:</td>
-                <td style="border: 0; text-transform: uppercase;"><input type="text" name="ticker"></input></td>
-            </tr>
-            <tr>
-                <td style="border: 0;  text-transform: capitalize;">quantity:</td>
-                <td style="border: 0;"><input type="text" name="qty"></input></td>
-            </tr>
-            <tr style="height: 12pt;"></tr>
-            <tr>
-                <td style="border: 0;"></td>
-                <td style="border: 0;"><input type="submit" name="submit" value="Submit"></td>
-            </tr>
-        </table>
-    </form>
+<header>
+	<nav>
+        <a href="index.html">home</a>
+	    <a href="info.html">contact</a>
+	    <a href="about.html">about</a>
+        <a href="purchase.html">purchase</a>
+  	</nav>
+</header>
 
-    <div id="purchase_data">Your purchase will appear as soon as you comfirmed.</div>
+<style>
 
-</div>
-<div id='debug'></div>
+    .parallax {
+        background-image: url("images/TradeFolio_logo1.jpg");
+        height: 550px;
+        /* Create the parallax scrolling effect */
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .centered {
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        color:#ffffff;
+        transform: translate(-50%, -50%);
+        border-color: #ffffff;
+        border-style: solid;
+        border-width: thick;
+    }
+
+    .image_parent {
+        height: 300px;
+        max-width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 10%;
+    }
+
+    .image_parent:hover{
+      -ms-transform: scale(1.05); /* IE 9 */
+      -webkit-transform: scale(1.05); /* Safari 3-8 */
+      transform: scale(1.05);
+    }
+
+    .card {
+        align-self: auto;
+        flex-grow: 4;
+        width: 45%;
+        padding: 10px;
+        display: inline-block;
+        margin: auto;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+        /* font-family: arial; */
+        border-radius: 10%;
+    }
+
+    .cardContainer{
+        width: 100%;
+        align-items: flex-start;
+        justify-content: center;
+        display:flex;
+        flex-wrap: wrap;
+    }
+
+    .intro{
+        width:40%;
+        margin:auto;
+    }
+
+    @media only screen and (max-device-width: 991px) {
+        .card {
+            width: 100%;
+        }
+        .intro{
+            width:80%;
+        }
+        .parallax {
+            height: 400px;
+            background-attachment: scroll;
+        }
+        .centered {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            color:#000000;
+            opacity: 0;
+        }
+    }
+</style>
+
+
+<body>
+
+    <div class="parallax"></div>
+
+	<br><br><br><br><br>
+
+	<div class = "container" style = "text-align: center;">
+		<h1>TradeFolio</h1>
+		<p class = "intro">Easy trade, all information at your finger tips </p>
+        <p class = "intro">Personalized plan, costomized advice based on your portfolio </p>
+		<br>
+	</div>
+
+	<br><br><br><br><br>
+
+	<div class = "container">
+		<div class="card">
+			<a href="about.html"><div class="image_parent" style="background-image: url('images/stock_1.jpg');"></div></a>
+			<h2> About Us </h2>
+			<p> Click the image above to learn more about us.</p>
+		</div>
+
+		<div class="card">
+			<a href="get_data.html"><div class="image_parent" style="background-image: url('images/stock_2.jpg');"></div></a>
+			<h2> Stock Info </h2>
+			<p> Click the image above to check out latest stock information.</p>
+		</div>
+
+        <div class="card">
+			<a href="purchase.html"><div class="image_parent" style="background-image: url('images/stock_2.jpg');"></div></a>
+			<h2> Pruchase </h2>
+			<p> Click the image above to set of a purchase.</p>
+		</div>
+	</div>
+
 </body>
-</html>
+<footer>
+	<ul>
+		<li><a href="mailto: tradefolio@gmail.com">Send Email</a></li>
+		<li><a href="">Feedback</a></li>
+	</ul>
+</footer>

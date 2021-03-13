@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeFolio - Pruchase</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script src=".js/purchase.js"></script>
+</head>
+<header>
+	<nav>
+        <a href="index.html">home</a>
+	    <a href="info.html">contact</a>
+	    <a href="about.html">about</a>
+        <a href="purchase.html">purchase</a>
+  	</nav>
+</header>
+
+<body>
+<div style="margin: 0.5in;">
+    <form name="stock" onsubmit="validateStock(); return false">
+        <h1>Input Stock</h1>
+        <table style="border: 0;">
+            <tr>
+                <td style="border: 0;  text-transform: capitalize;">ticker:</td>
+                <td style="border: 0; text-transform: uppercase;"><input type="text" name="ticker"></input></td>
+            </tr>
+            <tr>
+                <td style="border: 0;  text-transform: capitalize;">quantity:</td>
+                <td style="border: 0;"><input type="text" name="qty"></input></td>
+            </tr>
+            <tr style="height: 12pt;"></tr>
+            <tr>
+                <td style="border: 0;"></td>
+                <td style="border: 0;"><input type="submit" name="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+
+    <div id="purchase_data">Your purchase will appear as soon as you comfirmed.</div>
+
+</div>
+<div id='debug'></div>
+</body>
+</html>
