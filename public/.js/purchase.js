@@ -15,5 +15,5 @@ function printData() {
     var quantity = document.forms['stock']['qty'].value;
     quantity = parseInt(quantity);
 
-    document.getElementById("purchase_data").innerHTML = "<table><tr><th>Ticker</th><th>Quantity</th></tr><tr><td>" + ticker + "</td><td>" + quantity + " </td></tr></table>"
+    document.getElementById("purchase_data").innerHTML = "<table class='table table-dark'><tr><th>Ticker</th><th>Quantity</th></tr><tr><td>" + ticker + "</td><td>" + quantity + " </td></tr></table>"
 }
