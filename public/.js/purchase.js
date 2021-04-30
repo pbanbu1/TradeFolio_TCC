@@ -10,6 +10,7 @@ function validateStock() {
     }
 }
 
+// To Do: display data from mongodb, login page
 function printData() {
     console.log("inside printData");
 
@@ -18,14 +19,16 @@ function printData() {
     console.log(ticker, quantity);
 
     quantity = parseInt(quantity);
-
     document.getElementById("purchase_data").innerHTML = "<table class='table table-dark'><tr><th>Ticker</th><th>Quantity</th></tr><tr><td>" + ticker + "</td><td>" + quantity + " </td></tr></table>"
 
-    txt_data = {"entry": {"ticker": ticker, "quantity": quantity}};
+    txt_data = {"ticker": ticker, "quantity": quantity};
     console.log(txt_data);
 
     fetch("/purchase_onetime", {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(txt_data)
     })
     .then(response => {
