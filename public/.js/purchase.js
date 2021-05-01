@@ -9,7 +9,7 @@ function validateStock() {
         printData();
     }
 }
-
+var price = 0;
 const getStock = async ticker=>{
 	console.log("Getting data");
   	const request = await fetch('https://cors-anywhere.herokuapp.com/https://stocksapi.herokuapp.com/stock',{
@@ -23,14 +23,14 @@ const getStock = async ticker=>{
         })
     })
     const data = await request.json()
-    console.log(data);
-    return data;
+    console.log(data.data["Time Series (Daily)"]["2021-04-30"]["4. close"]);
+    price = data.data["Time Series (Daily)"]["2021-04-30"]["4. close"];
 }
 
 //getStock('AAPL');
 
 // To Do: display data from mongodb, login page
-function printData() {
+async function printData() {
     console.log("inside printData");
 
     var ticker = document.forms['stock']['ticker'].value;
@@ -73,31 +73,32 @@ function fetchData() {
     })
     .then(response => response.json())
     .then(data => {
-    console.log('Success:', data);
+        console.log('Success:', data);
 
-    num_entries = data.entry.length;
+        num_entries = data.entry.length;
 
-    //CODE TO GENERATE ENTRIES
-    entries_report = "<table class='table table-light'><tr><th>Ticker</th><th>Quantity</th><th>Most recent price</th></tr>";
+        //CODE TO GENERATE ENTRIES
+        entries_report = "<table class='table table-light'><tr><th>Ticker</th><th>Quantity</th><th>Most recent price</th></tr>";
 
-    console.log(JSON.stringify(data.entry))
-    for (i = num_entries - 1; i >= 0; i--) {
+        console.log(JSON.stringify(data.entry))
+        for (i = num_entries - 1; i >= 0; i--) {
 
-        console.log(data.entry[i])
-            // var dt = new Date(data.entries[i].ticker)
-            console.log("TRYING FOR "+i)
+            console.log(data.entry[i])
+            getStock(data.entry[i].ticker)
+                // var dt = new Date(data.entries[i].ticker)
+                console.log("TRYING FOR "+i)
+                // const price = await getStock(data.entry[i].ticker)
+                entries_report += "<tr><td>"
+                               + data.entry[i].ticker
+                               + "</td><td>"
+                               + data.entry[i].quantity
+                               + "</td><td>"
+                               + price
+                               + "</td></tr>";
+          }
+          entries_report += "</table>";
 
-            entries_report += "<tr><td>"
-                           + data.entry[i].ticker
-                           + "</td><td>"
-                           + data.entry[i].quantity
-                           + "</td><td>"
-                           + getStock(data.entry[i].ticker)
-                           + "</td></tr>";
-      }
-      entries_report += "</table>";
-
-      document.getElementById("purchase_data").innerHTML = entries_report;
+          document.getElementById("purchase_data").innerHTML = entries_report;
     })
     .catch((error) => {
       console.error('Error:', error);
