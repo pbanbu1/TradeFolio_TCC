@@ -1,35 +1,111 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Register</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="main.css">
-    </head>
-    <header>
-        <nav>
-            <a href="index.html">home</a>
-            <a href="info.html">register</a>
-            <a href="login.html">log in</a>
-            <a href="about.html">about</a>
-            <a href="purchase.html">purchase</a>
-        </nav>
-    </header>
-    <body>
-        <h1>Register</h1>
-        <div>
-        <form id="register_form" onsubmit="validateForm()">
-           User name: <input type = "text" class="type-field" name = "name">  <br>
-               Email: <input type = "text" class="type-field" name = "email">  <br>
-               Password: <input type = "password" class="type-field" name = "password">  <br>
-               Password again: <input type = "password" class="type-field" name = "password_2">  <br>
-           <input type = "submit" class="button-font" value = "Submit">
-        </form>
-          Already have an account?
-      <a href="login.html">Login Here</a>
-        </div>
 
-    </body>
+<head>
+    <meta charset="utf-8">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <style>
+        .myform {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 60px;
+            background-color: #eff1e6;
+            margin: 50px auto 40px auto;
+            width: 50%;
+            padding-top: 20px;
+            padding-bottom: 50px;
+            border-radius: 2em;
+            border: 5px solid #fff;
+            box-shadow: 0 0 0 2pt #FAF3EB;
+        }
+
+        .account {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 60px;
+            background-color: #eff1e6;
+            margin: 50px auto 40px auto;
+            width: 50%;
+            padding-top: 20px;
+            padding-bottom: 50px;
+            border-radius: 2em;
+            border: 5px solid #fff;
+            box-shadow: 0 0 0 2pt #FAF3EB;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        table tr th {
+            text-align: left;
+        }
+
+        input[type=text] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        input[type=text]:focus {
+            border: 3px solid #555;
+        }
+
+        input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+
+        input[type=password]:focus {
+            border: 3px solid #555;
+        }
+
+        .account {
+            text-align: center;
+        }
+    </style>
+</head>
+<header>
+    <nav>
+        <a href="index.html">home</a>
+        <a href="info.html">register</a>
+        <a href="login.html">log in</a>
+        <a href="about.html">about</a>
+        <a href="purchase.html">purchase</a>
+    </nav>
+</header>
+
+<body>
+    <!-- <h1>Register</h1> -->
+    <div class="myform">
+
+        <form id="register_form" onsubmit="validateForm()">
+            <h1>Register</h1>
+            User name: <input type="text" class="type-field" name="name"> <br>
+            Email: <input type="text" class="type-field" name="email"> <br>
+            Password: <input type="password" class="type-field" name="password"> <br>
+            Password again: <input type="password" class="type-field" name="password_2"> <br>
+            <input type="submit" class="button-font" value="Submit">
+        </form>
+    </div>
+
+    <div class="account">
+        Already have an account? <a href="login.html"> Login Here</a>
+    </div>
+
+</body>
+
 </html>
 
 <script>
@@ -41,29 +117,32 @@
         var password = document.forms[0]["password"].value;
         var email = document.forms[0]["email"].value;
 
-        register_data = {"user": name, "email": email, "password": password}
+        register_data = {
+            "user": name,
+            "email": email,
+            "password": password
+        }
         fetch("/register", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(register_data)
-        })
-        .then(response => {
-            if(response.status == 200){
-                alert("register successful");
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(register_data)
+            })
+            .then(response => {
+                if (response.status == 200) {
+                    alert("register successful");
+                    window.location.href = "/login.html";
+                } else if (response.status == 400) {
+                    alert("user already exist");
+                    window.location.href = "/login.html";
+                }
                 window.location.href = "/login.html";
-            } else if(response.status == 400){
-                alert("user already exist");
-                 window.location.href = "/login.html";
-            }
-            window.location.href = "/login.html";
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
 
     register_form.addEventListener("submit", insertForm);
-
 </script>
